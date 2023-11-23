@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: webpage
-          image: pl0xi/webpage:0.1.6
+          image: pl0xi/webpage:0.1.7
           ports:
             - containerPort: 3000
           env:
