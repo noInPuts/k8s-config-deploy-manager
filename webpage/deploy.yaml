@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: backend-config
 data:
-  REACT_APP_BACKEND_URL: "https://167.71.45.53"
+  BACKEND_URL: "https://167.71.45.53"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -25,11 +25,11 @@ spec:
           ports:
             - containerPort: 3000
           env:
-            - name: REACT_APP_BACKEND_URL
+            - name: BACKEND_URL
               valueFrom:
                 configMapKeyRef:
                   name: backend-config
-                  key: REACT_APP_BACKEND_URL
+                  key: BACKEND_URL
 ---
 apiVersion: v1
 kind: Service
