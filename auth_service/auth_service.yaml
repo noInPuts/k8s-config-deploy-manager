@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth-service
-          image: pl0xi/auth_service:0.0.4
+          image: pl0xi/auth_service:0.0.5
           ports:
             - containerPort: 8086
 ---
