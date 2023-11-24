@@ -30,6 +30,15 @@ spec:
   selector:
     app: webpage
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tls-secret
+  type: kubernetes.io/tls
+data:
+  tls.crt: ${{ secrets.ORIGIN_CERTIFICATE }}
+  tls.key: ${{ secrets.CERTIFICATE_PKEY }}
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -39,6 +48,7 @@ metadata:
 spec:
   rules:
     - host: mtogo.live
+      secretName: tls-secret
       http:
         paths:
           - path: /
