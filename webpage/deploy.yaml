@@ -46,9 +46,12 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  tls:
+    - hosts:
+        - mtogo.live
+      secretName: tls-secret
   rules:
     - host: mtogo.live
-      secretName: tls-secret
       http:
         paths:
           - path: /
