@@ -14,7 +14,18 @@ spec:
     spec:
       containers:
         - name: auth-service
-          image: pl0xi/auth_service:0.0.6
+          image: pl0xi/auth_service:0.0.7
+          env:
+          - name: DB_AUTH_SERVER_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: db-auth-credentials
+                key: db.auth_service.username
+          - name: DB_AUTH_SERVER_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-auth-credentials
+                key: db.auth_service.password
           ports:
             - containerPort: 8086
 ---
