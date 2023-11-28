@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq-service
+  template:
+    metadata:
+      labels:
+        app: rabbitmq-service
+    spec:
+      containers:
+        - name: rabbitmq-container
+          image: rabbitmq:3.12.8-management
+          ports:
+            - containerPort: 5672 
+              name: rabbitmq-amqp
+            - containerPort: 15672
+              name: management-ui-port
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: rabbitmq.username
+            - name: RABBITMQ_DEFAULT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: rabbitmq.password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-amqp-service
+spec:
+  selector:
+    app: rabbitmq-service
+  ports:
+    - protocol: TCP
+      port: 5672
+      targetPort: 5672
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-ui-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 15672  
+      targetPort: 15672 
+  selector:
+    app: rabbitmq-service
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: rabbitmq-secret
+  namespace: default
+spec:
+  encryptedData:
+    rabbitmq.password: AgAJpK8jrz9DvJ+VL2zawVIkvbetoa3y09J7XHZY5EcUCJSU6fhCU3blwmwJfE1ILnrjoJTRXzne8R2g9NhYVTnp8PwvgUGWyuBNoLDxTzwls21P5kdTBLFCaJQ/V1Y/UbkXgy4P3pnTKKrqF3ZdTly3DolAHMKo7J6H9J8mVIsQyw1RbQLghGfoIqHzxKtaJwe9bK6SMAbCwsWeT4k3E0hxlJyuTpEu+uuU4afAQD2UcC4e6Ij5w5Uy3AHiBbQzvh9VR8QHrdrqKpGoHBsoX8mDham3LCr64f/9aSF6egQ47DSB9derNLNZmlcj6J0R1wDXycS06fvsJA6CkvquRJsB5fxiQGo5Jyrnogcm+Oi7wAG0l+5UJXAuRF2xEiHEErEA7KMUC+xaMEl8bzomF7jRVcuR7dKwFI5n1XM468/GgcZ+S+d6KySXMdrMvCZPlF/bp8QrxRfb0ekoo0yG9IrrbSA2f8HjPS2aQs0ssaVFkeX1CrfxNog4xNoMcgzOtEWABuCI1u6FGtajoQlvqSo5mldECpwyN0TMgD2ndYqoJdZ9Bj3hRAdQYyMWzoWS97iP/L60t0oSnyY5/9XTnOlwxg7fanQlhcwhSqPHlOX3tWF5i3svB0bOvvIbJjtHrwckoaauxH2HWO1NOwPdeIoEWazwLPvV+wut3cfXCBnElS7xOfCBW5Ruh3dvMZ1h0KOpnt5rReD3+Pk=
+    rabbitmq.username: AgBhY7mAnjepq6dhnsMEhI3lJdwEGLF4wCha4EjvqcO0ykkZ6+0XBqv4O6bRTCrDRcnID6KDfQFgZjB2AGwZcs8WGl4ZQqxYkts0raLreGkgPkPRsSMZK1VrHKtHDUgix398BtZEV22jlRQHIF74YneZBDQwcsBwBfnXnWSXjEGPbOr/FSs2kAqghGPGYaiE5dbHTOsO+wNrq0Mz9R3Jw5umLZAi/sc9mSg13d2F+9m2D4XCP8wQNLq37hGcUkhW5Uj3RCuBoz+gFDDo17BEiHgWSx5e1k5fqn8pkV/aewcxZqBpyIJlcLQuJL9yo049UBaE8z6Zl/rZ4ohL3IRcuAqrJ46m3AD+ypLFFdtNZ9GcFk3cdk4KuWCdDM5d1fHRAZUOgcUonMBaSRrNwcTEzf1QqgYO0aaLjE/LdayWk8BIGTY0yFFNxBTbAcqnIkJn7GQ7czdhjrvqT3JR1c5XKjZvzCq37iZlr+5VAslpg338Kpi/veNDEJRj/kjvDk2q1c2KsjvHwk+95OWw+Ffo+CPcaNzpyrFIY1bwQWpOiYO5uBd60W6VrL+vBtXOlGhZ4VI8iH9gvspHQF4eqKOlB7RWaFwiNVy5kx6GLcAJxhHFd07uazUEr1RdE3CSAdBcUe7foWzCd/Wt0+GCfHdNkomOpE9hD/3DMgYJKNOy4UI9XiDCcjIDmgTJrSTQN1e+kX0jIsRa7Pw3oQ==
+  template:
+    metadata:
+      name: rabbitmq-secret
+      namespace: default
