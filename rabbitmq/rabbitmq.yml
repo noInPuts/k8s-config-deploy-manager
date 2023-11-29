@@ -12,6 +12,8 @@ spec:
       labels:
         app: rabbitmq-service
     spec:
+      nodeSelector:
+        custom-label: agentnode
       containers:
         - name: rabbitmq-container
           image: rabbitmq:3.12.8-management
