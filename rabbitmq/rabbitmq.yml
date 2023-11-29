@@ -18,6 +18,13 @@ spec:
           ports:
             - containerPort: 5672 
             - containerPort: 15672
+          resources:
+            requests:
+              memory: "140Mi"
+              cpu: "10m"
+            limits:
+              memory: "250Mi"
+              cpu: "50m"
           env:
             - name: RABBITMQ_DEFAULT_USER
               valueFrom:
@@ -29,13 +36,6 @@ spec:
                 secretKeyRef:
                   name: rabbitmq-secret
                   key: rabbitmq.password
-            resources:
-              requests:
-                memory: "140Mi"
-                cpu: "10m"
-              limits:
-                memory: "250Mi"
-                cpu: "50m"
 ---
 apiVersion: v1
 kind: Service
