@@ -28,6 +28,13 @@ spec:
                 key: db.auth_service.password
           ports:
             - containerPort: 8086
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "20m"
+            limits:
+              memory: "300Mi"
+              cpu: "50m"
 ---
 apiVersion: v1
 kind: Service
