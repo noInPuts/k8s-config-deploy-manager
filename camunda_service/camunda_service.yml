@@ -12,6 +12,8 @@ spec:
       labels:
         app: camunda-service
     spec:
+      nodeSelector:
+        custom-label: agentnode
       containers:
         - name: camunda-service
           image: pl0xi/camunda_service:0.0.1
