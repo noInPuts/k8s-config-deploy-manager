@@ -12,6 +12,8 @@ spec:
       labels:
         app: auth-service
     spec:
+      nodeSelector:
+        custom-label: agentnode
       containers:
         - name: auth-service
           image: pl0xi/auth_service:0.0.8
