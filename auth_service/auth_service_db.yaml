@@ -30,6 +30,13 @@ spec:
                 secretKeyRef:
                   name: db-auth-credentials
                   key: db.auth_service.password
+            resources:
+              requests:
+                memory: "50Mi"
+                cpu: "10m"
+              limits:
+                memory: "200Mi"
+                cpu: "100m"
 ---
 apiVersion: v1
 kind: Service
