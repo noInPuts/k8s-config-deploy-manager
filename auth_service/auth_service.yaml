@@ -16,7 +16,7 @@ spec:
         custom-label: agentnode
       containers:
         - name: auth-service
-          image: pl0xi/auth_service:0.0.9
+          image: pl0xi/auth_service:0.1.0
           env:
           - name: DB_AUTH_SERVER_USERNAME
             valueFrom:
@@ -28,6 +28,11 @@ spec:
               secretKeyRef:
                 name: db-auth-credentials
                 key: db.auth_service.password
+          - name: P_KEY_AUTH
+            valueFrom:
+              secretKeyRef:
+                name: jwt-secret
+                key: pkey.jwt
           ports:
             - containerPort: 8086
           resources:
