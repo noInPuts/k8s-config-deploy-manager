@@ -16,7 +16,7 @@ spec:
         custom-label: agentnode
       containers:
         - name: auth-service
-          image: pl0xi/auth_service:0.1.3
+          image: pl0xi/auth_service:0.1.2
           env:
           - name: DB_AUTH_SERVER_USERNAME
             valueFrom:
