@@ -34,7 +34,7 @@ spec:
                 name: jwt-secret
                 key: pkey.jwt
           ports:
-            - containerPort: 8086
+            - containerPort: 8083
           resources:
             requests:
               memory: "200Mi"
