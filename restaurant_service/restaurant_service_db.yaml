@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-database-restaurant-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-database-restaurant-service
+  template:
+    metadata:
+      labels:
+        app: postgres-database-restaurant-service
+    spec:
+      containers:
+        - name: postgres-container
+          image: postgres:16
+          ports:
+            - containerPort: 5432 
+          env:
+            - name: POSTGRES_HOST_AUTH_METHOD
+              value: md5
+            - name: POSTGRES_USER  
+              valueFrom:
+                secretKeyRef:
+                  name: db-restaurant-credentials
+                  key: db.restaurant_service.username
+            - name: POSTGRES_PASSWORD  
+              valueFrom:
+                secretKeyRef:
+                  name: db-restaurant-credentials
+                  key: db.restaurant_service.password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  selector:
+    app: postgres-database-restaurant-service
+  ports:
+    - protocol: TCP
+      port: 5433
+      targetPort: 5433
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: db-restaurant-credentials
+  namespace: default
+spec:
+  encryptedData:
+    db.restaurant_service.password: AgDkeSTrksP3sOi87Uoamd9yC35Kif6ixJOLyft7RSIlM4ycnIkzGAQFtCRZzqc3wtqM3tfvZEwPp+x1mvr0k0tCsbxGYytNhLJG42gICDAvuwIMOqHNsVZ/5eWeKSmyRVDtSMpw9McKotBUEna1GtFX0xkzx9WG5UltF+G0ZroDbn7DymplfUVion9g+oICg/VTTdVDMfSFxS6KBFia42CO/2wYL1w9X0VoaUkRZzs9s4fL9UxSUN0guosDhwHmNY5RgWA2Hc9OBc0RHVJovpD1auVr5cj0d6vjVSnCXCBup6RbbWtHJTRx5rZBMpRFcQYqFoNsoRQ4pp5RPIF4pCXj/LWXwSyqO94YObzD3nR66P4o/L0qlefCzuPWg/U4BiSqsWkdLSxtJfINrFG+k+j0gCWL+JJxwMGdRzrrk3182BgMVF0EHs8RmZscWPC4BTsDqjv1y4ii35akOBETsmhf16rq3GwAqekBNqJH/syQ8lnIUVsQQ1IxsEidIfLYr2af2nfOaTmmK53zopKqDv7/IpR9iRffy5B9PIM/0SbDn/CadH3473yZxTmGheddhVCZib1sJZqH0GAkA+fEdwRDroSt4jCPOWZjyKlQu5ITBaWXRPJmZPB4SnXU4ofKxOcSBwAlrXvRlYMX1pkANl19Gtcgud9tD2Fri/fseXCOUDBwIwbywrN10Bl0v1efomqxn9ePuJT4W6GceWer
+    db.restaurant_service.username: AgDU2zjyb9mcZPJbRtkkpSj5Zhxuu+XCraq5ilbqOY3KQFDMNfh8ik6bIjghH1hJmFsYzMqaYUvvrMgTf4N1RebpJU1+Dwoa6kDXXmUpwcau1dLaXEEHYdkpTGtQ6D6BvGgrw/aIzNa7KKmWQw9ozM/SRlbLfr12CjPABXtBfeUD75ojMbEZmFub/v8TbofZWt2o3PrAQEwI9Qq6RKYOYkGFhZucIfIJEA1gpskfbrKoFl8P0idupLbzJ02+F427Hx4gcL6MzXPY/Y4uMhvq4C8ZBGfL1vmeAju6gCnXycK5y1tOswe3CI60v1hUE0jL3HivXt+nrP4pWWS3zN+PltzF2hC1n32H9uUuKFAC2IIXB4ZamC2UNR2zgzL9C4qj1HBmIrYXC2jzmi5Y508r7Lq2wqwwjfACjWoCs6UfEfwWeqmT9AWR1vNPx2XA1HFKhpZ91vIOTFVazVTbScIOztbVZfYvmT9TjHf0s+387Curg/UtAXgmBWUvwhSBussfeFP1E76Orsvm7PDtHC0QwDiAZnCOAntJbW7SqzdtAp49ffso1QlT4VYFR0h73jot76z1lPg+vT5dvZRRi58h3UO9yzAClHAh0wstGHMobojd7dtl6o0iUclUmSYBMFUwQq36l1tIoU9k9xbIO7R8s503GnvMv4z2V6W/4/SCqagFxAfyBE37d/Z41hGV8vH4c1ft7E6eoVhDe1UaFiMw+A==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: db-restaurant-credentials
+      namespace: default

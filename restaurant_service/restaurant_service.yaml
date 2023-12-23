@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: restaurant-service
+spec:
+  replicas: 1  
+  selector:
+    matchLabels:
+      app: restaurant-service
+  template:
+    metadata:
+      labels:
+        app: restaurant-service
+    spec:
+      nodeSelector:
+        custom-label: agentnode
+      containers:
+        - name: restaurant-service
+          image: pl0xi/restaurant_service:0.0.4
+          env:
+          - name: DB_AUTH_SERVER_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: db-restaurant-credentials
+                key: db.restaurant_service.username
+          - name: DB_AUTH_SERVER_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-restaurant-credentials
+                key: db.restaurant.password
+          - name: P_KEY_AUTH
+            valueFrom:
+              secretKeyRef:
+                name: jwt-secret
+                key: pkey.jwt
+          ports:
+            - containerPort: 8086
+          resources:
+            requests:
+              memory: "200Mi"
+            limits:
+              memory: "700Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: restaurant-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8083  
+      targetPort: 8083 
+  selector:
+    app: restaurant-service
