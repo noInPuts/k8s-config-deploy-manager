@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
         - name: postgres-container
-          image: postgres:15
+          image: postgres:16
           ports:
-            - containerPort: 5433 
+            - containerPort: 5432
           env:
             - name: POSTGRES_HOST_AUTH_METHOD
               value: md5
@@ -41,7 +41,7 @@ spec:
   ports:
     - protocol: TCP
       port: 5433
-      targetPort: 5433
+      targetPort: 5432
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
