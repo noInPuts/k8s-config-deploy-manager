@@ -36,10 +36,17 @@ spec:
                 name: webpage
                 port:
                   number: 3000
-          - path: /api
+          - path: /api/auth
             pathType: Prefix
             backend:
               service:
                 name: auth-service
                 port:
-                  number: 8086                  
+                  number: 8086          
+          - path: /api/restaurant
+            pathType: Prefix
+            backend:
+              service:
+                name: restaurant-service
+                port:
+                  number: 8083          
