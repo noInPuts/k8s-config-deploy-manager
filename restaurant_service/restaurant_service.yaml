@@ -27,7 +27,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: db-restaurant-credentials
-                key: db.restaurant.password
+                key: db.restaurant_service.password
           - name: P_KEY_AUTH
             valueFrom:
               secretKeyRef:
