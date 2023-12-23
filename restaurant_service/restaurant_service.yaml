@@ -16,14 +16,14 @@ spec:
         custom-label: agentnode
       containers:
         - name: restaurant-service
-          image: pl0xi/restaurant_service:0.0.4
+          image: pl0xi/restaurant_service:0.0.5
           env:
-          - name: DB_AUTH_SERVER_USERNAME
+          - name: DB_RESTAURANT_SERVER_USERNAME
             valueFrom:
               secretKeyRef:
                 name: db-restaurant-credentials
                 key: db.restaurant_service.username
-          - name: DB_AUTH_SERVER_PASSWORD
+          - name: DB_RESTAURANT_SERVER_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: db-restaurant-credentials
