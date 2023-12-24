@@ -10,7 +10,7 @@ Services that needs to be exposed are done wtih load balancer and Nginx Ingress.
 - Webpage (React)  
   - Port: 3000
 - RabbitMQ Server
-  - Port: *
+  - Port: 5672
 - Restautant Service
   - Deployed with postgreSQL DB
   - Port: 8083
