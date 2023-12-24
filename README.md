@@ -5,7 +5,12 @@ This repository handles the deployment for our complete system. We are using Arg
 Services that needs to be exposed are done wtih load balancer and Nginx Ingress. Secrets are are created with Sealed Secrets.
 
 - Auth Service
-  - Deployed with postgresSQL DB
+  - Deployed with postgreSQL DB
   - Port: 8086
 - Webpage (React)  
   - Port: 3000
+- RabbitMQ Server
+  - Port: *
+- Restautant Service
+  - Deployed with postgreSQL DB
+  - Port: *
