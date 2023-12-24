@@ -15,4 +15,4 @@ Services that needs to be exposed are done wtih load balancer and Nginx Ingress.
   - Deployed with postgreSQL DB
   - Port: 8083
 - Camunda Service
-  - Port: *
+  - Port: 8087
