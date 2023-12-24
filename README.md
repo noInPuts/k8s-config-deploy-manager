@@ -14,3 +14,5 @@ Services that needs to be exposed are done wtih load balancer and Nginx Ingress.
 - Restautant Service
   - Deployed with postgreSQL DB
   - Port: *
+- Camunda Service
+  - Port: *
