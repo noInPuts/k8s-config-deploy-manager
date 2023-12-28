@@ -17,6 +17,7 @@ spec:
       containers:
         - name: order-service
           image: pl0xi/order_service:0.0.5
+          imagePullPolicy: Always
           env:
           - name: DB_ORDER_SERVER_USERNAME
             valueFrom:
