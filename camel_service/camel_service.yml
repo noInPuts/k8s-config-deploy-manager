@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: camel-service
+spec:
+  replicas: 1  
+  selector:
+    matchLabels:
+      app: camel-service
+  template:
+    metadata:
+      labels:
+        app: camel-service
+    spec:
+      nodeSelector:
+        custom-label: agentnode
+      containers:
+        - name: camel-service
+          image: pl0xi/camel_service:0.0.2
+          ports:
+            - containerPort: 8081
+            - containerPort: 9090
+          resources:
+            requests:
+              memory: "260Mi"
+            limits:
+              memory: "400Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: camel-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8081  
+      targetPort: 8081 
+  selector:
+    app: camel-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: camel-service-grpc
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 9090  
+      targetPort: 9090 
+  selector:
+    app: camel-service
