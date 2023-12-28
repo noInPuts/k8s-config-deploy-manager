@@ -23,13 +23,13 @@ spec:
             - name: POSTGRES_USER  
               valueFrom:
                 secretKeyRef:
-                  name: db-orders-credentials
-                  key: db.order_service.username
+                  name: db-restaurant-credentials
+                  key: db.restaurant_service.username
             - name: POSTGRES_PASSWORD  
               valueFrom:
                 secretKeyRef:
-                  name: db-orders-credentials
-                  key: db.order_service.password
+                  name: db-restaurant-credentials
+                  key: db.restaurant_service.password
 ---
 apiVersion: v1
 kind: Service
