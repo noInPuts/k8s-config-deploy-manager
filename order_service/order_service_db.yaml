@@ -37,7 +37,7 @@ metadata:
   name: postgres-order-service
 spec:
   selector:
-    app: postgres-database-auth-service
+    app: postgres-database-order-service
   ports:
     - protocol: TCP
       port: 5436
