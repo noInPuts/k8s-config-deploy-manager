@@ -16,7 +16,7 @@ spec:
         custom-label: agentnode
       containers:
         - name: camel-service
-          image: pl0xi/camel_service:0.0.3
+          image: pl0xi/camel_service:0.0.4
           ports:
             - containerPort: 8081
             - containerPort: 9090
@@ -25,6 +25,17 @@ spec:
               memory: "260Mi"
             limits:
               memory: "400Mi"
+          env:
+          - name: RABBITMQ_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: rabbitmq-secret
+                key: rabbitmq.username
+          - name: RABBITMQ_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: rabbitmq-secret
+                key: rabbitmq.password
 ---
 apiVersion: v1
 kind: Service
