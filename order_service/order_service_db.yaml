@@ -34,7 +34,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-service
+  name: postgres-order-service
 spec:
   selector:
     app: postgres-database-auth-service
