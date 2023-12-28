@@ -21,12 +21,12 @@ spec:
           - name: DB_ORDER_SERVER_USERNAME
             valueFrom:
               secretKeyRef:
-                name: db-order-credentials
+                name: db-orders-credentials
                 key: db.order_service.username
           - name: DB_ORDER_SERVER_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: db-order-credentials
+                name: db-orders-credentials
                 key: db.order_service.password
           - name: P_KEY_AUTH
             valueFrom:

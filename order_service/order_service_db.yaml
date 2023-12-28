@@ -23,12 +23,12 @@ spec:
             - name: POSTGRES_USER  
               valueFrom:
                 secretKeyRef:
-                  name: db-order-credentials
+                  name: db-orders-credentials
                   key: db.order_service.username
             - name: POSTGRES_PASSWORD  
               valueFrom:
                 secretKeyRef:
-                  name: db-order-credentials
+                  name: db-orders-credentials
                   key: db.order_service.password
 ---
 apiVersion: v1
@@ -47,7 +47,7 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   creationTimestamp: null
-  name: db-order-credentials
+  name: db-orders-credentials
   namespace: default
 spec:
   encryptedData:
@@ -56,5 +56,5 @@ spec:
   template:
     metadata:
       creationTimestamp: null
-      name: db-order-credentials
+      name: db-orders-credentials
       namespace: default
