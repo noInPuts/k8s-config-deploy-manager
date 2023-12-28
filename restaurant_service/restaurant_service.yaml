@@ -16,7 +16,7 @@ spec:
         custom-label: agentnode
       containers:
         - name: restaurant-service
-          image: pl0xi/restaurant_service:0.0.7
+          image: pl0xi/restaurant_service:0.0.8
           env:
           - name: DB_RESTAURANT_SERVER_USERNAME
             valueFrom:
