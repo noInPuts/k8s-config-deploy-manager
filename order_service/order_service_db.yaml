@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres-database-order-service
+  name: postgres-order-db-service
 spec:
   replicas: 1
   selector:
