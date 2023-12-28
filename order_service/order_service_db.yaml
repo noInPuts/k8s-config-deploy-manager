@@ -24,12 +24,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: db-order-credentials
-                  key: order_service.username
+                  key: db.order_service.username
             - name: POSTGRES_PASSWORD  
               valueFrom:
                 secretKeyRef:
                   name: db-order-credentials
-                  key: order_service.password
+                  key: db.order_service.password
 ---
 apiVersion: v1
 kind: Service
@@ -41,7 +41,7 @@ spec:
   ports:
     - protocol: TCP
       port: 5436
-      targetPort: 5436
+      targetPort: 5432
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -51,8 +51,8 @@ metadata:
   namespace: default
 spec:
   encryptedData:
-    order_service.password: AgBoCG9uYrWWzrVwi9PvN64lXOasluM0/0CowLliA182BCgNk0J1AAUhMZwgC7oRiza3VPeaOOumtBr6CV/TwO0bSmp03vlUz4fPo6ipLWZk1xbFGzrCr1VLjJdUnAUqnp4sVPxLBumL9jJTLY+z2qDTTUqIIfCo+wSgDCmnNkO9tJ9zb+vX+Q1MoWe2PsO79UAxnusEECzh0dkuWUjVtwcWpX7pNzYMFkQHxqY2zdqTY1+cTocBE1oqbAa/2usBkfnSKIiNy2GS2dRA3WfcqiE2f08vsGMjLDyLLhIgWOV4w4l9FWxbucCj2jk/nEN4O7PVBqyv4ZopOrD2r+J2oNgzBjnqvmwEYApjXxiMm27Qib0FrtXT9l5JzkS4kkMLBTL7aeWrXlLAQjvv83S+zflpjZw7fk1P3lFxbVSm8OSvbYGdmuon9f3zBnT6OkjqbYn0auYhRMRhraA6dG+QhpuOd5dbJ8UptynkOSubcdciud5sJsA3WOY42jY75kDG7qXQFW1Wxf4OEVw233ObTX9hoGvA/xBF3anZ189VPLhHz/uemiMQUrZVjVhGT4+tKufC67kjZ9viDP5kfOgti82jFWgE7SVoLX1k7XpCJ20pgEyp3he3hpnwGENk9GNuAPpcuCXBvXYjFWpkeGIFOZk/egnHFWcsW96++krvtvmrt8u9zsp3OrRiV/UJ3ODt5wEyomTSqT8IINZao6w=
-    order_service.username: AgB/pMZ2ggEw6xbtWeAKEgUwJ42TW6EICiW1EBDJoCCmhVOUtR4U8k9JJGeiZY/dhaWg3TPGgajADGDxzTFsdun4i3Chy98DNkUUQN5ejNTiEdpyXaRf0PyDXeA8/IaQWOVl2qiZ6fx9ruqoENo9eMy7OprX4a8lAImGfo1K7Z4bl8oI8PlJeVR1/KZEkLqgERv0OKpBJqLumOjNehuG5NUf1Lw7wl60mZriouOxgziWjvg0nGHV2WpaCD3Zr5g5/n+VS7RrZlSOA7OnyCiYc1J4sFgWdkxB1GEn0Zxybq/YZbAGcm2C5oG29X0D3xowCKgoHTu1gaX7hkkLBEm33jnqNSmtyPtihdcY8VtNFSm/qH4cDrkzVXYnKPNWOSFyHe9CTIi2Ro4PiMnEtSSj3oqUM/5Emn5nHrkQTxH+IRoLxZS9TjyaHGWsupRrzORM7DXm0uWwZBwK0+NfHFRCpRbtyhId7gWpzcAMKSbNg1nVeaAw0T/HVhP34FJFaihw8YJ7QwufEPJ4ErI7JzmF3hiW5QQpz1qRMEZRpFTW3LY6rOuO6Vxk5MCPy1IA3ADJ8UfWGljARqLzV0ctT8MNazQnBYbsr3pDsjHCpjiGqmX7FKL3/M08xiJpOB24IXoTLnAsHSDcCpEQq/AhRf/RVpZ9XHUWUqB87tcnFbdiI9g/b2UKidEBnPl9f3MgzNlCZV+Gx3/TXV/N+yc=
+    db.order_service.password: AgDkeSTrksP3sOi87Uoamd9yC35Kif6ixJOLyft7RSIlM4ycnIkzGAQFtCRZzqc3wtqM3tfvZEwPp+x1mvr0k0tCsbxGYytNhLJG42gICDAvuwIMOqHNsVZ/5eWeKSmyRVDtSMpw9McKotBUEna1GtFX0xkzx9WG5UltF+G0ZroDbn7DymplfUVion9g+oICg/VTTdVDMfSFxS6KBFia42CO/2wYL1w9X0VoaUkRZzs9s4fL9UxSUN0guosDhwHmNY5RgWA2Hc9OBc0RHVJovpD1auVr5cj0d6vjVSnCXCBup6RbbWtHJTRx5rZBMpRFcQYqFoNsoRQ4pp5RPIF4pCXj/LWXwSyqO94YObzD3nR66P4o/L0qlefCzuPWg/U4BiSqsWkdLSxtJfINrFG+k+j0gCWL+JJxwMGdRzrrk3182BgMVF0EHs8RmZscWPC4BTsDqjv1y4ii35akOBETsmhf16rq3GwAqekBNqJH/syQ8lnIUVsQQ1IxsEidIfLYr2af2nfOaTmmK53zopKqDv7/IpR9iRffy5B9PIM/0SbDn/CadH3473yZxTmGheddhVCZib1sJZqH0GAkA+fEdwRDroSt4jCPOWZjyKlQu5ITBaWXRPJmZPB4SnXU4ofKxOcSBwAlrXvRlYMX1pkANl19Gtcgud9tD2Fri/fseXCOUDBwIwbywrN10Bl0v1efomqxn9ePuJT4W6GceWer
+    db.order_service.username: AgDU2zjyb9mcZPJbRtkkpSj5Zhxuu+XCraq5ilbqOY3KQFDMNfh8ik6bIjghH1hJmFsYzMqaYUvvrMgTf4N1RebpJU1+Dwoa6kDXXmUpwcau1dLaXEEHYdkpTGtQ6D6BvGgrw/aIzNa7KKmWQw9ozM/SRlbLfr12CjPABXtBfeUD75ojMbEZmFub/v8TbofZWt2o3PrAQEwI9Qq6RKYOYkGFhZucIfIJEA1gpskfbrKoFl8P0idupLbzJ02+F427Hx4gcL6MzXPY/Y4uMhvq4C8ZBGfL1vmeAju6gCnXycK5y1tOswe3CI60v1hUE0jL3HivXt+nrP4pWWS3zN+PltzF2hC1n32H9uUuKFAC2IIXB4ZamC2UNR2zgzL9C4qj1HBmIrYXC2jzmi5Y508r7Lq2wqwwjfACjWoCs6UfEfwWeqmT9AWR1vNPx2XA1HFKhpZ91vIOTFVazVTbScIOztbVZfYvmT9TjHf0s+387Curg/UtAXgmBWUvwhSBussfeFP1E76Orsvm7PDtHC0QwDiAZnCOAntJbW7SqzdtAp49ffso1QlT4VYFR0h73jot76z1lPg+vT5dvZRRi58h3UO9yzAClHAh0wstGHMobojd7dtl6o0iUclUmSYBMFUwQq36l1tIoU9k9xbIO7R8s503GnvMv4z2V6W/4/SCqagFxAfyBE37d/Z41hGV8vH4c1ft7E6eoVhDe1UaFiMw+A==
   template:
     metadata:
       creationTimestamp: null
