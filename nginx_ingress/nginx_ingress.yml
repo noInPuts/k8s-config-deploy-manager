@@ -49,4 +49,11 @@ spec:
               service:
                 name: restaurant-service
                 port:
-                  number: 8083          
+                  number: 8083      
+          - path: /api/order
+            pathType: Prefix
+            backend:
+              service:
+                name: order-service
+                port:
+                  number: 8084   
