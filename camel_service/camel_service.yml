@@ -16,7 +16,7 @@ spec:
         custom-label: agentnode
       containers:
         - name: camel-service
-          image: pl0xi/camel_service:0.0.6
+          image: pl0xi/camel_service:0.0.7
           ports:
             - containerPort: 8081
             - containerPort: 9090
