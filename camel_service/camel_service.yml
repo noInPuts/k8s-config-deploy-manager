@@ -64,5 +64,5 @@ spec:
     - port: 8081
       targetPort: 8081
   selector:
-    app: camel-service-test
+    app: camel-service
   type: LoadBalancer
