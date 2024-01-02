@@ -39,11 +39,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: camel-service-grpc
+  labels:
+    app.kubernetes.io/instance: mtogo
+  name: camel-service
+  namespace: default
 spec:
   ports:
-    - protocol: TCP
-      port: 9090  
-      targetPort: 9090 
+    - port: 9090
+      targetPort: 9090
   selector:
     app: camel-service
+  type: LoadBalancer
+
