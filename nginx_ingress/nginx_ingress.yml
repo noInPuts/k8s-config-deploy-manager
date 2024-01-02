@@ -57,3 +57,10 @@ spec:
                 name: order-service
                 port:
                   number: 8084   
+        - path: /api/camel
+          pathType: Prefix
+          backend:
+            service:
+              name: camel-service
+              port:
+                number: 9090
