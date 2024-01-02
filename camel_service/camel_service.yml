@@ -54,7 +54,6 @@ kind: Service
 metadata:
   name: camel-service-grpc
 spec:
-  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 9090  
