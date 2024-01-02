@@ -40,7 +40,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: camel-service
+  name: camel-service-grpc
   namespace: default
 spec:
   ports:
