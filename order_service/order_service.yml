@@ -16,7 +16,7 @@ spec:
         custom-label: agentnode
       containers:
         - name: order-service
-          image: pl0xi/order_service:0.0.8
+          image: pl0xi/order_service:0.0.9
           imagePullPolicy: Always
           env:
           - name: DB_ORDER_SERVER_USERNAME
