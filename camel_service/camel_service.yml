@@ -19,6 +19,7 @@ spec:
           image: pl0xi/camel_service:0.0.9
           ports:
             - containerPort: 9090
+            - containerPort: 8081
           resources:
             requests:
               memory: "260Mi"
@@ -50,4 +51,18 @@ spec:
   selector:
     app: camel-service
   type: LoadBalancer
-
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: mtogo
+  name: camel-service-test
+  namespace: default
+spec:
+  ports:
+    - port: 8081
+      targetPort: 8081
+  selector:
+    app: camel-service-test
+  type: LoadBalancer
