@@ -18,7 +18,6 @@ spec:
         - name: camel-service
           image: pl0xi/camel_service:0.0.9
           ports:
-            - containerPort: 8081
             - containerPort: 9090
           resources:
             requests:
@@ -36,18 +35,6 @@ spec:
               secretKeyRef:
                 name: rabbitmq-secret
                 key: rabbitmq.password
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: camel-service
-spec:
-  type: LoadBalancer
-  ports:
-    - port: 8081  
-      targetPort: 8081 
-  selector:
-    app: camel-service
 ---
 apiVersion: v1
 kind: Service
