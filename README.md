@@ -33,5 +33,6 @@ The webpage will have the path "/", and our backend api's are using the "/api/*s
 We have 2 nodes, each on their own cluster.
 - 2 Cluster
 - 2 Nodes
+
 ![Cluster and nodes](https://raw.githubusercontent.com/noInPuts/k8s-config-deploy-manager/main/pictures/kubernetes_2.png)
 ![Deployment architecture on kubernetes](https://raw.githubusercontent.com/noInPuts/k8s-config-deploy-manager/main/pictures/kubernetes_1.png)
