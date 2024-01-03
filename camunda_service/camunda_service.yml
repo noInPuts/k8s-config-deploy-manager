@@ -16,7 +16,7 @@ spec:
         custom-label: agentnode
       containers:
         - name: camunda-service
-          image: pl0xi/camunda_service:0.0.1
+          image: pl0xi/camunda_service:0.0.2
           ports:
             - containerPort: 8087
           resources:
@@ -24,6 +24,17 @@ spec:
               memory: "260Mi"
             limits:
               memory: "400Mi"
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: rabbitmq.username
+            - name: RABBITMQ_DEFAULT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: rabbitmq.password
 ---
 apiVersion: v1
 kind: Service
